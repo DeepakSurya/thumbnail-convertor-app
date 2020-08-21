@@ -4,18 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
 </head>
 <body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">
+          Home
+        </a>
+      </nav>
+<div class="container" style="margin-top: 50px; ">
+    <div class="head">
+        <h3 class="thumb">Thumbnail Image:</h3>
+        <h3 class="orginal" style="display: none;">Orginal Image:</h3>
+    </div>
+    <div style="border: grey; border-style: solid; border-width: 1px; margin-top: 30px;">
+        <div style="margin-top: 30px; margin-left: 50px;">
+            <p><b>Uploaded file name:</b> <%=fileName %></p>
+            <p class="thumb"><i>Click on the Image to view the Original Image.</i></p>
+            <p  class="orginal" style="display: none;" >Click on the image to view the Thumbnail Image.</p>
+            
+        </div>
+        <div style="margin-top: 30px; margin-left: 50px; margin-bottom: 30px;">
+            <div onclick="showOrginal()" class="thumb"><img src="/new/<%=fileName %>"></div>
+            <div class="orginal" style="display: none;" onclick="showThumb()" ><img src="/upload/<%=fileName %>"></div>
+        </div>
+    </div>
+    
+</div>
 
-<h1 class="thumb">Thumbnail</h1>
-<h1 class="orginal" style="display: none;">Orginal</h1>
 
-<p><%=fileName %></p>
-<div onclick="showOrginal()" class="thumb"><img src="/new/<%=fileName %>"></div>
-<div class="orginal" style="display: none;" onclick="showThumb()" ><img src="/upload/<%=fileName %>"></div>
 
-<p class="thumb">click on the image to view the original image</p>
-<p  class="orginal" style="display: none;" >click on the image to view the thumbnail image</p>
+
+
 
 
 </body>

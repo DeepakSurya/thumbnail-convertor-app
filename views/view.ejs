@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<h1 class="thumb">Thumbnail</h1>
+<h1 class="orginal" style="display: none;">Orginal</h1>
+
+<p><%=fileName %></p>
+<div onclick="showOrginal()" class="thumb"><img src="/new/<%=fileName %>"></div>
+<div class="orginal" style="display: none;" onclick="showThumb()" ><img src="/upload/<%=fileName %>"></div>
+
+<p class="thumb">click on the image to view the original image</p>
+<p  class="orginal" style="display: none;" >click on the image to view the thumbnail image</p>
+
+
+</body>
+<script>
+    var orginal=document.getElementsByClassName('orginal');
+    var thumb=document.getElementsByClassName('thumb');
+
+
+    function showOrginal(){
+        for(var i=0;i<thumb.length;i++){
+            thumb[i].style.display="none";
+        }
+        for(var i=0;i<orginal.length;i++){
+            orginal[i].style.display="block";
+        }
+
+    }
+    function showThumb(){
+        for(var i=0;i<orginal.length;i++){
+            orginal[i].style.display="none";
+        }
+        for(var i=0;i<thumb.length;i++){
+            thumb[i].style.display="block";
+        }
+
+    }
+</script>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "tbnail",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.0",
+    "jimp": "^0.16.0",
+    "mongoose": "^5.10.0",
+    "path": "^0.12.7"
+  }
+}

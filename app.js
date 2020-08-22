@@ -9,6 +9,7 @@ var session=require('express-session');
 var cookieParser=require('cookie-parser');
 var User=require('./models/user');
 var Upload=require('./models/upload');
+var Album=require('./models/album');
 
 var userId;
 var upload=require('express-fileupload');
@@ -310,6 +311,37 @@ app.get('/home/:id/gallery/:uploadId',function(req,res){
          
    
  });
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ app.get('/home/:id/myalbums',function(req,res){
+
+    
+    User.findById(req.params.id).populate('albums').exec(function(err,foundUser){
+        res.render('album',{user:foundUser});
+
+    });
+
+
+ });
+
+ app.get('/home/:id/newalbum',function(req,res){
+    res.render('newalbum');
+});
+
+app.post('/home/:id/myalbums',function(req,res){
+
+
+    User.findById(userId,function(err,foundUser){
+        Album.create({
+            title:req.body.title,
+            description:req.body.description,
+            username:foundUser.username
+        },function(err,created){
+            foundUser.albums.push(created);
+            foundUser.save();
+            res.redirect('/home/'+foundUser._id+'/myalbums');
+        });
+    })
+});
 
 
 

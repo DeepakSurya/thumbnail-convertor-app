@@ -30,6 +30,9 @@
                 <li class="nav-item active d-flex justify-content-end">
                     <a class="nav-link" href="/home/<%=user._id%>/gallery">Gallery <span class="sr-only">(current)</span></a>
                     </li>
+                    <li class="nav-item active d-flex justify-content-end">
+                      <a class="nav-link" href="/home/<%=user._id%>/myalbums">My Albums <span class="sr-only">(current)</span></a>
+                      </li>
             </ul>
           </div>
         </nav>
@@ -44,7 +47,9 @@
               <br>
               <p> <i><b>Show off your stuffs in style!</b></i></p>
               <p>It's showtime.Start adding your photos now.</p>
-              <a href="/home/<%=user._id%>/upload" class="btn btn-dark btn-sm">Upload new photo</a>
+              <a href="/home/<%=user._id%>/upload" class="btn btn-dark btn-sm">Upload new photo</a><br><br>
+              <a href="/home/<%=user._id%>/newalbum" class="btn btn-dark btn-sm">Create new album</a>
+
             </div>
 
 

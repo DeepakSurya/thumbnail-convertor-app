@@ -9,12 +9,15 @@ var userSchema=new mongoose.Schema({
     email:String,
     phone:String,
     gender:String,
-    orginalUploads:[String],
-    modifiedUploads:[String],
     uploads:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Upload'
+    }],
+    albums:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Album'
     }]
+
 });
 
 userSchema.plugin(passportLocalMongoose);

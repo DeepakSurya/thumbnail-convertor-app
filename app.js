@@ -208,7 +208,7 @@ app.get('/home/:id/gallery',function(req,res){
    // User.findOne({username:req.session.username}).populate('privateEvents').exec(function(err,userFound){
     if(req.user){
         User.findById(req.params.id).populate('uploads').exec(function(err,foundUser){
-            res.render('gallery',{user:foundUser});
+            res.render('gallery',{user:foundUser,albumId:albumId});
     
         });
   
@@ -306,60 +306,79 @@ app.get('/home/:id/gallery/:uploadId',function(req,res){
  });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
  app.get('/home/:id/myalbums',function(req,res){
+    if(req.user){
+        User.findById(req.params.id).populate('albums').exec(function(err,foundUser){
 
+            res.render('album',{user:foundUser});
     
-    User.findById(req.params.id).populate('albums').exec(function(err,foundUser){
-
-        res.render('album',{user:foundUser});
-
-    });
-
-
+        });
+    }else{
+        res.redirect('/login')
+    }
  });
 
  app.get('/home/:id/newalbum',function(req,res){
-    res.render('newalbum');
+    if(req.user){
+        res.render('newalbum',{userId:userId});
+
+    }else{
+        res.redirect('/login')
+    }
 });
 
 app.post('/home/:id/myalbums',function(req,res){
 
-
-    User.findById(userId,function(err,foundUser){
-        Album.create({
-            title:req.body.title,
-            description:req.body.description,
-            username:foundUser.username
-        },function(err,created){
-            foundUser.albums.push(created);
-            foundUser.save();
-            res.redirect('/home/'+foundUser._id+'/myalbums');
-        });
-    })
+    if(req.user){
+        User.findById(userId,function(err,foundUser){
+            Album.create({
+                title:req.body.title,
+                description:req.body.description,
+                username:foundUser.username
+            },function(err,created){
+                foundUser.albums.push(created);
+                foundUser.save();
+                res.redirect('/home/'+foundUser._id+'/myalbums');
+            });
+        })
+    }else{
+        res.redirect('/login')
+    }
+    
 });
 
 
 
 
 app.get('/home/:id/myalbums/:album',function(req,res){
-    albumId=req.params.album;
-    Album.findById(req.params.album).populate('gallery').exec(function(err,found){
-        res.render('albumgallery',{album:found,user:userId});
-
-    })
+    if(req.user){
+        albumId=req.params.album;
+        Album.findById(req.params.album).populate('gallery').exec(function(err,found){
+            res.render('albumgallery',{album:found,user:userId});
+    
+        })
+    }else{
+        res.redirect('/login')
+    }
+   
 });
 
 app.get('/home/:id/myalbums/:album/addtoalbum',function(req,res){
+    if(req.user){
+        User.findById(req.params.id).populate('albums').exec(function(err,foundUser){
 
-    User.findById(req.params.id).populate('albums').exec(function(err,foundUser){
+            res.render('addtoalbum',{user:foundUser,albumId:albumId});
+    
+        });
+    }else{
+        res.redirect('/login')
+    }
 
-        res.render('addtoalbum',{user:foundUser,albumId:albumId});
-
-    });
+   
 });
 
 app.post('/home/:id/myalbums/:album',function(req,res){
    
-
+    if(req.user){
         if(req.files){
             //console.log(req.files);
             
@@ -408,6 +427,7 @@ app.post('/home/:id/myalbums/:album',function(req,res){
                             Album.findById(albumId,function(err,albumFound){
                                albumFound.gallery.push(created);
                                 albumFound.save();
+                                res.redirect('/home/'+userId+'/myalbums/'+albumId);
                                //console.log("albumFound",albumFound,'created',created);
                             });
                             
@@ -434,6 +454,11 @@ app.post('/home/:id/myalbums/:album',function(req,res){
         }else{
             console.log('no');
         }
+    }else{
+        res.redirect('/login')
+    }
+
+        
 
    
 });

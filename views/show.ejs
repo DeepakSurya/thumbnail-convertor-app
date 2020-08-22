@@ -12,28 +12,27 @@
     
     <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: black;">
         <a class="navbar-brand" href="#">
-          <img src="https://static1.squarespace.com/static/5511f9bee4b068878ae651fb/t/5d1d26d4e0a1f3000185b85c/1562191573169/hiw-step1-v2.png" width="60" height="50" class="d-inline-block align-top" alt="logo">
-  
+          <img src="/logo.JPG" width="80" height="80" class="d-inline-block align-top" alt="logo">  
       </a>      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ">
+            <ul ml-auto pr-5 class="navbar-nav ml-auto pr-5">
               <li class="nav-item active d-flex justify-content-end">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/home/<%=id%>">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active d-flex justify-content-end">
                     <a class="nav-link" href="/home/<%=id%>/gallery">Gallery <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active d-flex justify-content-end">
-                        <a class="nav-link" href="/home/:id/gallery">My Albums <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/home/<%=id%>/myalbums">My Albums <span class="sr-only">(current)</span></a>
                         </li>
             </ul>
           </div>
         </nav>
   
-  <div class="container">
-      <img src="<%=upload.orginalUpload %>" alt="image">
+  <div class="container" style="margin-top: 100px; margin-left: 300px;">
+      <img src="<%=upload.orginalUpload %>" style="max-width: 800px; max-height: 800px; overflow: scroll;" alt="image">
   </div>
 
 </body>
